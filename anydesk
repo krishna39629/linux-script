@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Define the AnyDesk version and URL
+ANYDESK_VERSION="6.1.1-1"
+ANYDESK_URL="https://download.anydesk.com/linux/anydesk-${ANYDESK_VERSION}.el8.x86_64.rpm"
+
+# Update the system
+sudo dnf update -y
+
+# Download the AnyDesk RPM package
+wget $ANYDESK_URL -O /tmp/anydesk.rpm
+
+# Install the AnyDesk package
+sudo dnf install -y /tmp/anydesk.rpm
+
+# Clean up the downloaded RPM package
+rm -f /tmp/anydesk.rpm
+
+# Start the AnyDesk service
+sudo systemctl start anydesk
+
+# Enable AnyDesk to start on boot
+sudo systemctl enable anydesk
+
+# Output the status of AnyDesk service
+sudo systemctl status anydesk
+
+echo "AnyDesk installation completed successfully."
